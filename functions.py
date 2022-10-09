@@ -9,7 +9,7 @@ def get_new_webdriver(url):
   options = webdriver.ChromeOptions() # Создание объекта настроек
   options.add_argument('headless') # Активация скрытого режима
 
-  EXE_PATH = r"C:\Users\User-B.I.G._03\Desktop\second_brain\Computer Science\Языки программирования\Python\Moduls\Selenium\driver.exe" # Путь до драйвера
+  EXE_PATH = "./driver" # Путь до драйвера
   driver = webdriver.Chrome(executable_path=EXE_PATH, chrome_options=options)
 
   driver.get(url)

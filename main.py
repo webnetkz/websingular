@@ -11,8 +11,10 @@ import time
 from functions import get_new_webdriver
 
 def startApp():
-  get_new_webdriver("https://www.dublinbet2020.com")
-
+  driver = get_new_webdriver("https://www.dublinbet2020.com")
+  print(driver)
+  while(1):
+    pass
 
 if __name__ == '__main__':
   startApp()
