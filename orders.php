@@ -1,0 +1,10 @@
+<?php
+require_once"./public/components/header.php";require_once"./app/core/order/show_all_orders.php";?><link rel="stylesheet"href="./public/css/orders.css"><div id="mainContent"><div id="mainContentContainer"><table class="table"><thead><tr><th>Id</th><th>Manager</th><th>Create date</th><th>Days</th><th>Start date</th><th>Language</th><th>Country</th><th>Pax</th><th>Service class</th><th>Hotel class</th><th>Rumming</th></tr></thead><tbody><?php
+if(isset($res)&&!empty($res)){foreach($res as $k=>$v){echo"<tr onclick='location.href=\"./calculator.php?ord=".$v["id"]."\"'>";echo"<td>".$v['id']."</td>";echo"<td>".$v['manager']."</td>";echo"<td>".$v['create']."</td>";echo"<td>".$v['count_days']."</td>";if(!empty($v['start_date'])){if($v['start_date']=="1992-01-01"){$v['start_date']="Без точных дат";}elseif($v['start_date']=="1999-01-01"){$v['start_date']="Низкий сезон (октябрь-март)";}elseif($v['start_date']=="2001-01-01"){$v['start_date']="Высокий сезон (март-октябрь)";}
+echo"<td>".$v['start_date']."</td>";}else{echo"<td></td>";}
+if(!empty($v['lang'])){echo"<td>".$lang[$v['lang']-1]['result']."</td>";}else{echo"<td></td>";}
+if(!empty($v['country'])){echo"<td>".$country[$v['country']-1]['result']."</td>";}else{echo"<td></td>";}
+echo"<td>".$v['count_pax']."</td>";if(!empty($v['service_class'])){echo"<td>".$service[$v['service_class']-1]['result']."</td>";}else{echo"<td></td>";}
+if(!empty($v['hotel_class'])){echo"<td>".$hotel[$v['hotel_class']-1]['result']."</td>";}else{echo"<td></td>";}
+echo'</tr>';}}?></tbody></table><div class="paginationContainer"><div class="paginationContent"><a href="./orders.php?page=1">1</a><a href="./orders.php?page=2">2</a><a href="./orders.php?page=3">3</a><a href="./orders.php?page=4">4</a><a href="./orders.php?page=4">5</a><a href="./orders.php?page=6">6</a><a href="./orders.php?page=7">7</a><a href="./orders.php?page=8">8</a><a href="./orders.php?page=9">9</a><a href="./orders.php?page=10">10</a></div></div></div></div><?php
+require_once"./public/components/footer.php";?>

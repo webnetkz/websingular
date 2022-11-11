@@ -1,20 +1,41 @@
 # coding=utf-8           # -*- coding: utf-8 -*-
-import random
-import requests
-import base64
-import json
-import sys
-import locale
+from jsmin import jsmin
 import os
-import re
-import time
-from functions import get_new_webdriver
 
-def startApp():
-  driver = get_new_webdriver("https://www.dublinbet2020.com")
-  print(driver)
-  while(1):
-    pass
+
+
+def minifyC(nameJSFile):
+
+  with open(nameJSFile) as js_file:
+    
+    minifiedJSCode = jsmin(js_file.read(), quote_chars="'\"`")
+    
+    newJSFile = open(nameJSFile, "w")
+    newJSFile.write(minifiedJSCode)
+    newJSFile.close()
+    
+def getAllFiles(folder):
+  tree = list(os.walk(folder))
+  
+  for i in tree:
+
+    # Игнорирует не нужные кталоги
+    gitFolder = folder+"\.git"
+
+    if gitFolder in i[0]:
+      del i
+
+    # Удаляет пустые кталоги
+    elif (not i[1]) & (not i[2]):
+      del i 
+
+    else:
+      print("Processing folder: ", i[0])
+      for x in i[2]:
+        pathToFile = i[0]+"\\"+x
+        print("Start compression :", pathToFile)
+        minifyC(pathToFile)
+        print("Finish compression")
 
 if __name__ == '__main__':
-  startApp()
+  getAllFiles("./pwa/app")
